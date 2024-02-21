@@ -28,8 +28,16 @@ void setup() {
 void loop() {
   display.clearDisplay();
   V = analogRead(sensorPin);    //realizar la lectura
-  Rsensor = 1024L * Rc / V - Rc;   //calcular el valor de la resistencia
-  uy = (Rc*pow(1024L, 2)/(5*pow(V, 2)))*0.025;
+  Rsensor = (((5.03/1023L)*V) * 10.54 * pow(10, 3)) / 5.03 ;   //calcular el valor de la resistencia
+
+  //uy = (Rc*pow(1024L, 2)/(5*pow(V, 2)))*0.025;
+
+  uy = sqrt((109.7704L) + (pow((0.005*V),2)*1405.705L) + (pow(0.005*V,2)*2090.83L));
+
+  if (Rsensor == 0){
+    uy = 0;
+  }
+
 
   display.setTextSize(2);
   display.setTextColor(WHITE);
@@ -44,4 +52,5 @@ void loop() {
   display.print((char)0xE9);
   display.println(")");
   display.display();
+  Serial.println(V);
 }
