@@ -1,6 +1,6 @@
-led = 9;
-sw = 2;
-pot = A0;
+int led = 9;
+int sw = 2;
+int pot = A0;
 
 void setup() {
   pinMode(led, OUTPUT);
@@ -24,6 +24,6 @@ void loop() {
   }
 
   while (digitalRead(sw) == 0){
-    analogWrite(led, analogRead(pot));
+    analogWrite(led, map(analogRead(pot), 0, 255, 0, 1023));
   }
 }
